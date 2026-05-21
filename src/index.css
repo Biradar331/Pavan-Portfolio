@@ -1,0 +1,622 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-accent: #3b82f6;
+  --color-accent-teal: #14b8a6;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-sans);
+  @apply overflow-x-clip bg-slate-50 text-slate-800 antialiased;
+}
+
+.app-shell {
+  @apply w-full overflow-x-clip bg-slate-50 dark:bg-slate-950;
+}
+
+.main-content {
+  @apply w-full pb-24 md:pb-16;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-orb {
+    animation: none !important;
+  }
+}
+
+/* Layout rhythm */
+.section-block {
+  @apply relative w-full py-16 sm:py-20 lg:py-24;
+}
+
+.section-container {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-stack {
+  @apply flex w-full flex-col gap-8 sm:gap-10;
+}
+
+.section-stack > *:first-child {
+  @apply mt-0;
+}
+
+/* Scroll progress */
+.scroll-progress-track {
+  @apply fixed left-0 top-0 z-[60] h-[3px] w-full bg-slate-200/50 dark:bg-slate-800/50;
+}
+
+.scroll-progress-bar {
+  @apply h-full bg-gradient-to-r from-blue-500 via-blue-400 to-teal-400;
+}
+
+/* Page loader */
+.page-loader {
+  @apply fixed inset-0 z-[100] flex items-center justify-center bg-slate-50 dark:bg-slate-950;
+}
+
+.page-loader-logo {
+  @apply text-2xl font-bold text-slate-900 dark:text-white;
+}
+
+.page-loader-bar {
+  @apply mx-auto mt-5 h-1 w-32 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800;
+}
+
+.page-loader-bar-fill {
+  @apply block h-full rounded-full bg-gradient-to-r from-blue-500 to-teal-400;
+}
+
+/* Floating resume — mobile */
+.floating-resume-cta {
+  @apply fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-40 inline-flex max-w-[calc(100vw-2rem)] items-center gap-2 rounded-full bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(59,130,246,0.45)] transition hover:bg-blue-500 active:scale-95;
+}
+
+/* Section system */
+.section-divider {
+  @apply pointer-events-none absolute inset-x-0 top-0 z-0 h-px bg-gradient-to-r from-transparent via-slate-300/70 to-transparent dark:via-slate-700/70;
+}
+
+.section-header {
+  @apply max-w-3xl;
+}
+
+.section-description {
+  @apply mt-4 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg;
+}
+
+.section-heading {
+  @apply text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl;
+}
+
+.section-header .section-heading {
+  @apply mb-0;
+}
+
+.section-title {
+  @apply mb-2 text-sm font-semibold uppercase tracking-widest text-blue-500;
+}
+
+/* Navbar */
+.navbar-root {
+  @apply fixed inset-x-0 top-0 z-50 transition-all duration-300;
+}
+
+.navbar-top {
+  @apply bg-transparent;
+}
+
+.navbar-scrolled {
+  @apply border-b border-slate-200/80 bg-white/92 shadow-sm backdrop-blur-lg dark:border-slate-800/80 dark:bg-slate-950/92;
+}
+
+.navbar-brand {
+  @apply text-lg font-bold tracking-tight text-slate-900 dark:text-white;
+}
+
+.navbar-link-active {
+  @apply bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400;
+}
+
+.navbar-mobile-link {
+  @apply w-full rounded-lg px-3 py-3 text-left text-sm font-medium text-slate-700 dark:text-slate-200;
+}
+
+.navbar-icon-btn {
+  @apply rounded-lg p-2.5 text-slate-600 transition hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800;
+}
+
+.navbar-resume-btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(59,130,246,0.3)] transition hover:bg-blue-500;
+}
+
+.navbar-mobile-panel {
+  @apply border-t border-slate-200 bg-white/98 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/98;
+}
+
+/* Contact */
+.contact-section {
+  @apply bg-slate-100/40 dark:bg-slate-900/30;
+}
+
+.contact-card {
+  @apply rounded-2xl border border-slate-200/80 bg-white/90 p-8 shadow-sm backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/70 sm:p-10;
+}
+
+.contact-email {
+  @apply flex items-center justify-center gap-2 text-lg font-semibold text-blue-600 transition hover:text-blue-500 dark:text-blue-400;
+}
+
+.contact-cta-row {
+  @apply flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center;
+}
+
+.contact-social {
+  @apply rounded-lg border border-slate-200 p-3 text-slate-600 transition hover:border-blue-300 hover:text-blue-600 dark:border-slate-700 dark:text-slate-400 dark:hover:text-teal-400;
+}
+
+/* Achievements */
+.achievements-section {
+  @apply bg-white/30 dark:bg-slate-950/40;
+}
+
+.achievement-card {
+  @apply flex gap-3 rounded-xl border border-slate-200/80 bg-white/80 p-4 shadow-sm transition dark:border-slate-800 dark:bg-slate-900/60;
+}
+
+.profiles-card {
+  @apply rounded-2xl border border-slate-200/80 bg-white/80 p-6 dark:border-slate-800 dark:bg-slate-900/60;
+}
+
+.profile-link-btn {
+  @apply inline-flex items-center gap-2 rounded-lg border border-slate-300/90 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-600 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:text-teal-400;
+}
+
+/* Project enhancements */
+.project-impact-box {
+  @apply rounded-xl border border-blue-200/50 bg-blue-50/40 p-4 dark:border-blue-900/40 dark:bg-blue-500/5;
+}
+
+.project-impact-line {
+  @apply text-sm leading-relaxed text-slate-700 before:mr-2 before:inline-block before:h-1 before:w-1 before:rounded-full before:bg-blue-500 before:content-[''] dark:text-slate-300;
+}
+
+.project-actions {
+  @apply flex flex-col gap-2 border-t border-slate-200/80 pt-5 sm:flex-row sm:flex-wrap sm:items-center dark:border-slate-700/80;
+}
+
+.project-actions .project-btn-ghost {
+  @apply sm:ml-auto;
+}
+
+.project-btn-disabled {
+  @apply inline-flex cursor-default items-center gap-2 rounded-lg border border-dashed border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-400 dark:border-slate-600 dark:text-slate-500;
+}
+
+.project-detail-panel {
+  @apply rounded-xl bg-slate-50/80 p-4 dark:bg-slate-800/50;
+}
+
+.project-detail-title {
+  @apply mb-3 text-xs font-bold uppercase tracking-[0.12em];
+}
+
+.project-detail-title-blue {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.project-detail-title-teal {
+  @apply text-teal-600 dark:text-teal-400;
+}
+
+.project-detail-li {
+  @apply text-sm leading-relaxed text-slate-600 before:mr-2 before:inline-block before:h-1 before:w-1 before:rounded-full before:bg-slate-400 before:content-[''] dark:text-slate-400;
+}
+
+.project-screenshot-shine {
+  @apply pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-white/5;
+}
+
+html.dark body {
+  @apply bg-slate-950 text-slate-100;
+}
+
+.navbar-link {
+  @apply rounded-lg px-2 py-2 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800/80 dark:hover:text-teal-400 lg:px-3 lg:text-sm;
+}
+
+.card {
+  @apply rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-sm backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/60;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-slate-950;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-teal-500 dark:hover:text-teal-400;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-500 via-blue-400 to-teal-400 bg-clip-text text-transparent;
+}
+
+/* ——— Hero section ——— */
+.hero-section {
+  @apply bg-slate-50 dark:bg-slate-950;
+}
+
+.hero-mesh {
+  background-image:
+    linear-gradient(to right, rgb(148 163 184 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(148 163 184 / 0.06) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, black 15%, transparent 75%);
+}
+
+.dark .hero-mesh {
+  background-image:
+    linear-gradient(to right, rgb(71 85 105 / 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(71 85 105 / 0.12) 1px, transparent 1px);
+}
+
+.hero-orb {
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: hero-orb-drift 14s ease-in-out infinite;
+}
+
+.hero-orb-blue {
+  background: radial-gradient(circle, rgb(59 130 246 / 0.35) 0%, transparent 70%);
+  @apply -right-20 top-10 h-64 w-64 sm:-right-32 sm:top-20 sm:h-[420px] sm:w-[420px];
+}
+
+.hero-orb-teal {
+  background: radial-gradient(circle, rgb(20 184 166 / 0.28) 0%, transparent 70%);
+  animation-delay: -7s;
+  @apply -left-16 bottom-0 h-56 w-56 sm:-left-24 sm:bottom-10 sm:h-[360px] sm:w-[360px];
+}
+
+@keyframes hero-orb-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(12px, -16px) scale(1.04);
+  }
+}
+
+.hero-eyebrow {
+  letter-spacing: 0.02em;
+}
+
+.hero-title {
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+.hero-tech-pill {
+  @apply rounded-lg border border-slate-200/90 bg-white/70 px-3 py-1.5 text-[0.8125rem] font-medium tracking-wide text-slate-700 shadow-sm backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/50 dark:text-slate-300;
+}
+
+.hero-stat-card {
+  @apply rounded-xl border border-slate-200/70 bg-white/60 px-3.5 py-3 backdrop-blur-sm transition-colors dark:border-slate-800/80 dark:bg-slate-900/40;
+}
+
+.hero-stat-card:hover {
+  @apply border-blue-200/80 dark:border-blue-900/50;
+}
+
+.hero-btn-primary {
+  @apply inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(59,130,246,0.35)] transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_6px_20px_rgba(59,130,246,0.4)] sm:w-auto;
+}
+
+.hero-btn-secondary {
+  @apply inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300/90 bg-white/80 px-6 py-3.5 text-sm font-semibold text-slate-700 backdrop-blur-sm transition-all duration-300 hover:border-blue-300 hover:bg-white hover:text-blue-600 dark:border-slate-600 dark:bg-slate-900/60 dark:text-slate-200 dark:hover:border-teal-500/40 dark:hover:text-teal-400 sm:w-auto;
+}
+
+.hero-social-link {
+  @apply inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-2 transition-all hover:border-slate-200 hover:bg-white/80 dark:hover:border-slate-700 dark:hover:bg-slate-900/60;
+}
+
+.hero-profile-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(59, 130, 246, 0.18) 0%,
+    rgba(20, 184, 166, 0.08) 45%,
+    transparent 72%
+  );
+}
+
+.dark .hero-profile-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(59, 130, 246, 0.22) 0%,
+    rgba(20, 184, 166, 0.1) 45%,
+    transparent 72%
+  );
+}
+
+/* ——— Certifications ——— */
+.certifications-section {
+  @apply bg-white/40 dark:bg-slate-950/50;
+}
+
+.cert-summary-pill {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white/70 px-4 py-2 text-sm text-slate-600 backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/50 dark:text-slate-400;
+}
+
+.cert-card-wrapper {
+  @apply relative h-full;
+}
+
+.cert-card-glow {
+  @apply absolute -inset-px rounded-[1.15rem] bg-gradient-to-br from-blue-500/0 via-teal-400/0 to-blue-600/0 opacity-0 blur-sm transition-opacity duration-500 group-hover:from-blue-500/20 group-hover:via-teal-400/10 group-hover:to-blue-600/20 group-hover:opacity-100;
+}
+
+.cert-card {
+  @apply relative flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_4px_24px_rgba(15,23,42,0.05)] backdrop-blur-sm transition-all duration-400 dark:border-slate-800/90 dark:bg-slate-900/75 dark:shadow-[0_4px_28px_rgba(0,0,0,0.22)];
+}
+
+.cert-card-wrapper:hover .cert-card {
+  @apply border-blue-200/50 dark:border-blue-500/25;
+}
+
+.cert-logo-badge {
+  @apply flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl border shadow-sm;
+}
+
+.cert-logo-tcs {
+  @apply border-[#1e3a5f]/20 bg-gradient-to-br from-[#1e3a5f] to-[#2d5a87] text-white;
+}
+
+.cert-logo-aws {
+  @apply border-[#ff9900]/25 bg-[#232f3e] text-[#ff9900];
+}
+
+.cert-logo-udemy {
+  @apply border-[#a435f0]/25 bg-[#2d1f3d] text-[#a435f0];
+}
+
+.cert-logo-conference {
+  @apply border-amber-500/25 bg-amber-500/10 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400;
+}
+
+.cert-status-badge {
+  @apply inline-flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-wide;
+}
+
+.cert-status-completed {
+  @apply border border-emerald-200/80 bg-emerald-50 text-emerald-700 dark:border-emerald-800/50 dark:bg-emerald-500/10 dark:text-emerald-400;
+}
+
+.cert-status-progress {
+  @apply border border-amber-200/80 bg-amber-50 text-amber-700 dark:border-amber-800/50 dark:bg-amber-500/10 dark:text-amber-400;
+}
+
+.cert-tag {
+  @apply rounded-md border border-slate-200/80 bg-slate-50 px-2.5 py-1 text-[0.75rem] font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-400;
+}
+
+/* ——— About section ——— */
+.about-section {
+  @apply bg-slate-100/50 dark:bg-slate-900/30;
+}
+
+.about-highlight-card {
+  @apply rounded-xl border border-slate-200/70 bg-white/80 px-4 py-3.5 backdrop-blur-sm transition-colors hover:border-blue-200/60 dark:border-slate-800/80 dark:bg-slate-900/60 dark:hover:border-blue-800/40;
+}
+
+.about-bio-card {
+  @apply rounded-2xl border border-slate-200/80 bg-white/90 p-7 shadow-[0_4px_24px_rgba(15,23,42,0.05)] backdrop-blur-sm dark:border-slate-800/90 dark:bg-slate-900/70 sm:p-8;
+}
+
+.about-objective-card {
+  @apply flex h-full flex-col rounded-2xl border border-blue-200/40 bg-gradient-to-br from-white to-blue-50/30 p-7 shadow-sm dark:border-blue-900/30 dark:from-slate-900/80 dark:to-blue-500/5 sm:p-8;
+}
+
+.about-focus-item {
+  @apply flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300;
+}
+
+/* ——— Experience timeline ——— */
+.experience-section {
+  @apply bg-slate-100/50 dark:bg-slate-900/30;
+}
+
+.experience-timeline {
+  @apply list-none space-y-0 p-0;
+}
+
+.experience-timeline-item {
+  @apply relative pb-14 pl-11 sm:pl-16;
+}
+
+.experience-timeline-item:last-child {
+  @apply pb-0;
+}
+
+.experience-timeline-dot {
+  @apply absolute left-0 top-1 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-teal-500 shadow-[0_0_0_4px_rgba(248,250,252,1)] ring-2 ring-blue-500/25 dark:shadow-[0_0_0_4px_rgba(2,6,23,1)] dark:ring-blue-400/35;
+}
+
+.experience-timeline-connector {
+  @apply absolute left-[1.125rem] top-10 bottom-0 w-px -translate-x-1/2 bg-gradient-to-b from-blue-400/50 via-teal-400/35 to-blue-400/10;
+}
+
+.experience-card {
+  @apply rounded-2xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-shadow duration-400 sm:p-7 dark:border-slate-800/90 dark:bg-slate-900/70 dark:shadow-[0_4px_28px_rgba(0,0,0,0.2)];
+}
+
+.experience-card:hover {
+  @apply border-blue-200/70 shadow-[0_12px_40px_-8px_rgba(59,130,246,0.15)] dark:border-blue-500/25;
+}
+
+.experience-type-badge {
+  @apply rounded-md bg-slate-100 px-2 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wider text-slate-600 dark:bg-slate-800 dark:text-slate-400;
+}
+
+.experience-focus-badge {
+  @apply rounded-md bg-blue-50 px-2 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wider text-blue-700 dark:bg-blue-500/15 dark:text-blue-300;
+}
+
+.experience-duration-badge {
+  @apply rounded-xl border border-blue-200/60 bg-blue-50/80 px-3.5 py-2 text-xs font-bold tracking-wide text-blue-800 dark:border-blue-800/50 dark:bg-blue-500/10 dark:text-blue-200;
+}
+
+.experience-skill-tag {
+  @apply rounded-lg border border-slate-200/80 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-300;
+}
+
+/* ——— Skills section ——— */
+.skills-section {
+  @apply bg-white/40 dark:bg-slate-950/50;
+}
+
+.skills-core-pill {
+  @apply rounded-full border border-blue-200/80 bg-gradient-to-r from-blue-50 to-teal-50/80 px-4 py-1.5 text-sm font-semibold text-blue-800 shadow-sm dark:border-blue-800/50 dark:from-blue-500/10 dark:to-teal-500/10 dark:text-blue-200;
+}
+
+.skill-category-card {
+  @apply relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_4px_20px_rgba(15,23,42,0.05)] backdrop-blur-sm transition-all duration-400 dark:border-slate-800/90 dark:bg-slate-900/70 dark:shadow-[0_4px_24px_rgba(0,0,0,0.2)];
+}
+
+.skill-category-icon {
+  @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl;
+}
+
+.skill-tag {
+  @apply rounded-lg px-3 py-1.5 text-[0.8125rem] font-medium transition-colors duration-300;
+}
+
+.skill-tag-blue {
+  @apply border border-blue-100 bg-blue-50/80 text-blue-800 dark:border-blue-900/50 dark:bg-blue-500/10 dark:text-blue-300;
+}
+
+.skill-tag-violet {
+  @apply border border-violet-100 bg-violet-50/80 text-violet-800 dark:border-violet-900/50 dark:bg-violet-500/10 dark:text-violet-300;
+}
+
+.skill-tag-indigo {
+  @apply border border-indigo-100 bg-indigo-50/80 text-indigo-800 dark:border-indigo-900/50 dark:bg-indigo-500/10 dark:text-indigo-300;
+}
+
+.skill-tag-sky {
+  @apply border border-sky-100 bg-sky-50/80 text-sky-800 dark:border-sky-900/50 dark:bg-sky-500/10 dark:text-sky-300;
+}
+
+.skill-tag-teal {
+  @apply border border-teal-100 bg-teal-50/80 text-teal-800 dark:border-teal-900/50 dark:bg-teal-500/10 dark:text-teal-300;
+}
+
+.skill-tag-purple {
+  @apply border border-purple-100 bg-purple-50/80 text-purple-800 dark:border-purple-900/50 dark:bg-purple-500/10 dark:text-purple-300;
+}
+
+.skill-tag-slate {
+  @apply border border-slate-200 bg-slate-50/80 text-slate-700 dark:border-slate-600 dark:bg-slate-800/60 dark:text-slate-300;
+}
+
+.skills-soft-panel {
+  @apply rounded-2xl border border-teal-200/50 bg-teal-50/30 p-6 dark:border-teal-900/40 dark:bg-teal-500/5;
+}
+
+.skills-soft-tag {
+  @apply rounded-lg border border-teal-200/80 bg-white/60 px-3 py-1.5 text-sm font-medium text-teal-800 dark:border-teal-800/60 dark:bg-slate-900/40 dark:text-teal-300;
+}
+
+/* ——— Projects section ——— */
+.projects-section {
+  @apply bg-slate-100/60 dark:bg-slate-900/40;
+}
+
+.projects-stat-pill {
+  @apply inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/70 px-4 py-2 text-sm backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/50;
+}
+
+.project-card {
+  @apply overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 shadow-[0_4px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-shadow duration-400 dark:border-slate-800/90 dark:bg-slate-900/70 dark:shadow-[0_4px_32px_rgba(0,0,0,0.25)];
+}
+
+.project-card:hover {
+  @apply border-blue-200/60 shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:border-blue-500/20 dark:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.12)];
+}
+
+.project-card-featured {
+  @apply lg:rounded-[1.35rem];
+}
+
+.project-screenshot-img {
+  @apply transition-transform duration-700 ease-out;
+}
+
+@media (hover: hover) {
+  .project-card:hover .project-screenshot-img {
+    transform: scale(1.05);
+  }
+}
+
+.project-screenshot-overlay {
+  @apply bg-gradient-to-t from-slate-900/50 via-slate-900/5 to-transparent opacity-60 transition-opacity duration-400 group-hover:opacity-80;
+}
+
+.project-category-badge {
+  @apply rounded-lg border border-white/20 bg-slate-900/75 px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-wider text-white shadow-lg backdrop-blur-md;
+}
+
+.project-live-badge {
+  @apply inline-flex items-center rounded-lg border border-emerald-400/30 bg-emerald-500/20 px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-wider text-emerald-100 backdrop-blur-md;
+}
+
+.project-tech-tag {
+  @apply rounded-md border border-slate-200/90 bg-slate-50 px-2.5 py-1 text-[0.75rem] font-medium text-slate-700 transition-colors duration-300 group-hover:border-blue-200/80 group-hover:bg-blue-50/50 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-300 dark:group-hover:border-blue-800/50 dark:group-hover:bg-blue-500/10;
+}
+
+.project-btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-300;
+}
+
+.project-btn-github {
+  @apply border border-slate-300/90 bg-white text-slate-800 hover:border-slate-400 hover:bg-slate-50 hover:shadow-md dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:border-slate-500 dark:hover:bg-slate-700/80;
+}
+
+.project-btn-demo {
+  @apply bg-blue-600 text-white shadow-[0_4px_12px_rgba(59,130,246,0.3)] hover:bg-blue-500 hover:shadow-[0_6px_16px_rgba(59,130,246,0.35)];
+}
+
+.project-btn-ghost {
+  @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200;
+}
+
+/* Graduation / portrait photo — head-and-shoulders crop from full-body shots */
+.profile-portrait {
+  object-fit: cover;
+  object-position: center 18%;
+  transform: scale(1.08);
+  transform-origin: center 22%;
+}
+
+@media (min-width: 640px) {
+  .profile-portrait {
+    object-position: center 16%;
+    transform: scale(1.06);
+  }
+}
+
+@media (min-width: 1024px) {
+  .profile-portrait {
+    object-position: center 15%;
+  }
+}

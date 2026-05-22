@@ -8,7 +8,7 @@ export const personal = {
   workModes: 'On-site · Hybrid · Remote',
   rolesOpenTo:
     'Software Engineer · Frontend Developer · Full Stack Developer · GET / Analyst',
-  resumePath: '/resume/Resume_Software.pdf',
+  resumePath: '/resume/Resume.pdf',
   photoPath: '/images/profile.jpg',
 };
 
